@@ -1,0 +1,68 @@
+configs:
+#---------SLOs------------------------
+- id: demo-availability
+  type:
+    settings: builtin:monitoring.slo
+    scope: tenant
+  config:
+    name: demo-availability
+    parameters:
+      service: myservice
+      target: 95
+      timeframe: -1d
+      warning: 98
+    template: availability-slo.json
+    skip: false
+- id: demo-performance
+  type:
+    settings: builtin:monitoring.slo
+    scope: tenant
+  config:
+    name: demo-performance
+    parameters:
+      service: <service name>
+      target: 90
+      threshold: 20000
+      timeframe: -1d
+      warning: 95
+    template: performance-slo.json
+    skip: false
+#----------SRG-------------------------------
+- id: demo-guardian
+  type:
+    settings:
+      schema: app:dynatrace.site.reliability.guardian:guardians
+      schemaVersion: 1.0.1
+      scope: environment
+  config:
+    name: demo-guardian
+    parameters:
+      availability-slo:
+        configType: builtin:monitoring.slo
+        property: name
+        type: reference
+        configId: demo-availability
+      performance-slo:
+        configType: builtin:monitoring.slo
+        property: name
+        type: reference
+        configId: demo-performance
+    template: guardian.json
+    skip: false
+#-------------Workflow----------------------
+- id: demo-workflow
+  type:
+    automation:
+      resource: workflow
+  config:
+    name: demo-Validation-Workflow
+    parameters:
+      guardianid:
+        configType: app:dynatrace.site.reliability.guardian:guardians
+        property: id
+        type: reference
+        configId: demo-guardian
+      #git repo
+        #include task in workflow to call the git parser 
+    template: srg-workflow.json
+    skip: false

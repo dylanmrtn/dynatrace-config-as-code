@@ -1,0 +1,18 @@
+manifestVersion: "1.0"
+projects:
+- name: demo
+  path: demo
+environmentGroups:
+- name: default
+  environments:
+  - name: d1
+    url:
+      value: https://hwz97639.sprint.dynatracelabs.com
+    auth:
+      token:
+        name: DT_API_TOKEN
+    oAuth:
+      clientId: 
+        name: OAUTH_CLIENT_ID
+      clientSecret:
+        name: OAUTH_CLIENT_SECRET

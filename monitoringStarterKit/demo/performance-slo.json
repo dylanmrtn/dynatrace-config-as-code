@@ -1,0 +1,16 @@
+{
+    "enabled": true,
+    "name": "{{ .name }}",
+    "customDescription": "Availability SLO for {{ .service }}. Created via Monaco",
+    "metricName": "{{ .name }}",
+    "metricExpression": "((builtin:service.response.time:avg:partition(\"latency\",value(\"good\",lt({{ .threshold }}))):splitBy():count:default(0))/(builtin:service.response.time:avg:splitBy():count)*(100))",
+    "evaluationType": "AGGREGATE",
+    "filter": "type(\"SERVICE\"),entityName.equals(\"{{ .service }}\")",
+    "evaluationWindow": "{{ .timeframe }}",
+    "targetSuccess": "{{ .target }}",
+    "targetWarning": "{{ .warning }}",
+    "errorBudgetBurnRate": {
+        "burnRateVisualizationEnabled": true,
+        "fastBurnThreshold": 1.5
+    }
+}

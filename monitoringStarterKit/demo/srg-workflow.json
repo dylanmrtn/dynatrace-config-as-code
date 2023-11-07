@@ -1,0 +1,49 @@
+{
+    "description": "",
+    "isPrivate": true,
+    "labels": {},
+    "schemaVersion": 3,
+    "taskDefaults": {},
+    "tasks": {
+        "siteReliabilityGuardian1": {
+            "action": "dynatrace.site.reliability.guardian:validate-guardian-action",
+            "description": "Automation action to start a Site Reliability Guardian validation",
+            "input": {
+                "executionId": "{{`{{`}} execution().id {{`}}`}}",
+                "objectId": "{{.guardianid}}",
+                "timeframeInputType": "timeframeSelector",
+                "timeframeSelector": {
+                    "from": "now-24h",
+                    "to": "now"
+                }
+            },
+            "name": "site_reliability_guardian",
+            "position": {
+                "x": 0,
+                "y": 1
+            },
+            "predecessors": []
+        }
+    },
+    "title": "{{.name}}",
+    "trigger": {
+        "schedule": {
+          "isActive": true,
+          "isFaulty": false,
+          "trigger": {
+            "time": "08:00",
+            "type": "time"
+          },
+          "rule": null,
+          "filterParameters": {
+            "earliestStart": "2023-11-06"
+          },
+          "timezone": "America/New_York",
+          "inputs": {},
+          "nextExecution": "2023-11-07T13:00:00Z"
+        }
+      },
+    "triggerType": "Event",
+    "usages": [],
+    "version": 2
+}

@@ -1,0 +1,25 @@
+{
+    "name": "Dylan Test Guardian",
+    "description": "Created via Monaco. Built from availability and performance SLOs also created via Monaco",
+    "tags": [],
+    "objectives": [
+        {
+            "name": "Booking Service Availability SLO",
+            "description": null,
+            "objectiveType": "REFERENCE_SLO",
+            "referenceSlo": "func:slo.{{ .availability-slo}}",
+            "comparisonOperator": "GREATER_THAN_OR_EQUAL",
+            "target": 90,
+            "warning": 95
+        },
+        {
+            "name": "booking service performance SLO",
+            "description": null,
+            "objectiveType": "REFERENCE_SLO",
+            "referenceSlo": "func:slo.{{ .performance-slo}}",
+            "comparisonOperator": "GREATER_THAN_OR_EQUAL",
+            "target": 90,
+            "warning": 95
+        }
+    ]
+}
